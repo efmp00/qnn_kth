@@ -1281,9 +1281,14 @@ def makeLossListIndex(qnnArch, numTrainingPairs, numberSupervisedPairsList, lda,
             numberSupervisedPairs) + 'sv_' + qnnArchString + 'network_delta' + str(delta).replace('.',
                                                                                                                    'i') + '_lda' + str(
             lda).replace('.', 'i') + '_ep' + str(ep).replace('.', 'i') + '_plot.csv')
-        SsvTraining.append(float(readdf.tail(1)['SsvTraining']))
-        SsvTestingAll.append(float(readdf.tail(1)['SsvTestingAll']))
-        SsvTestingUsv.append(float(readdf.tail(1)['SsvTestingUsv']))
+        # SsvTraining.append(float(readdf.tail(1)['SsvTraining']))
+        # SsvTestingAll.append(float(readdf.tail(1)['SsvTestingAll']))
+        # SsvTestingUsv.append(float(readdf.tail(1)['SsvTestingUsv']))
+        # ChatGPT-assisted customization
+
+        SsvTraining.append(float(complex(readdf.tail(1)['SsvTraining'].iloc[0]).real))
+        SsvTestingAll.append(float(complex(readdf.tail(1)['SsvTestingAll'].iloc[0]).real))
+        SsvTestingUsv.append(float(complex(readdf.tail(1)['SsvTestingUsv'].iloc[0]).real))
 
     plt.scatter(numberSupervisedPairsList, SsvTraining, label='QNN Ssv (training)', color='green')
     plt.scatter(numberSupervisedPairsList, SsvTestingUsv, label='QNN Ssv (testing USV)', color='blue')
